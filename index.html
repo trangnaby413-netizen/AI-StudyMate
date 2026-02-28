@@ -65,14 +65,6 @@
 }
 
 html { scroll-behavior: smooth; }
-FileInputStream serviceAccount =
-new FileInputStream("path/to/serviceAccountKey.json");
-
-FirebaseOptions options = new FirebaseOptions.Builder()
-  .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-  .build();
-
-FirebaseApp.initializeApp(options);
 body {
   font-family: var(--font-body);
   background: var(--off-white);
@@ -2789,5 +2781,22 @@ function rebuildCharts() {
 }
 
 </script>
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { getFirestore, setDoc, doc, getDoc } 
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_KEY",
+  authDomain: "YOUR_DOMAIN",
+  projectId: "YOUR_ID",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
 </body>
 </html>

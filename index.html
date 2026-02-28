@@ -453,28 +453,30 @@ body {
   color: var(--ink-2);
   margin-bottom: 6px;
 }
-input[type=text], input[type=number], input[type=password], input[type=email], select, textarea {
-  width: 100%;
-  background: var(--off-white);
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 10px 14px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--ink-1);
-  outline: none;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-input:focus, select:focus, textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(102,126,234,0.12);
-  background: white;
-}
-select option { background: white; }
-input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
-input[type=number] { -moz-appearance: textfield; }
-input[type=range] { width: 100%; accent-color: var(--accent); cursor: pointer; }
+<input id="login-email" placeholder="Email">
+<input id="login-password" type="password" placeholder="Mật khẩu">
+<button onclick="loginUser()">Đăng nhập</button>
+<input id="register-name" placeholder="Tên">
+<input id="register-email" placeholder="Email">
+<input id="register-password" type="password" placeholder="Mật khẩu">
+<button onclick="registerUser()">Đăng ký</button>
 
+<input id="login-email" placeholder="Email">
+<input id="login-password" type="password" placeholder="Mật khẩu">
+<button onclick="loginUser()">Đăng nhập</button>
+
+async function handleLogin() {
+  const email = document.getElementById("login-email").value;
+  const password = document.getElementById("login-password").value;
+
+  try {
+    await loginUser(email, password);
+    document.getElementById("login-screen").style.display = "none";
+    document.getElementById("main-app").style.display = "block";
+  } catch (error) {
+    alert(error.message);
+  }
+}
 /* =====================================================
    PROGRESS BARS
 ===================================================== */
@@ -596,14 +598,6 @@ window.loginUser = async function(email, password){
   await signInWithEmailAndPassword(auth, email, password);
 };
 </script>
-    
-<input id="login-email" placeholder="Email">
-<input id="login-password" type="password" placeholder="Mật khẩu">
-<button onclick="loginUser()">Đăng nhập</button>
-<input id="register-name" placeholder="Tên">
-<input id="register-email" placeholder="Email">
-<input id="register-password" type="password" placeholder="Mật khẩu">
-<button onclick="registerUser()">Đăng ký</button>
 
 window.registerUser = async function() {
   const email = document.getElementById("register-email").value;
@@ -624,10 +618,6 @@ window.registerUser = async function() {
     alert(error.message);
   }
 }
-
-<input id="login-email" placeholder="Email">
-<input id="login-password" type="password" placeholder="Mật khẩu">
-<button onclick="loginUser()">Đăng nhập</button>
 
 window.loginUser = async function() {
   const email = document.getElementById("login-email").value;
